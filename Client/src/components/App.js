@@ -4,7 +4,7 @@ import Item from "./Item.js";
 function App() {
   const [items, setItems] = useState([]);
   const [todoInput, setTodoInput] = useState("");
-
+  const backendUrl = "http://localhost:3033";
   const handleInputChange = ({ target }) => {
     setTodoInput(target.value);
   };
@@ -23,7 +23,7 @@ function App() {
   const removeItem = async (id) => {
     const item = items.find((item) => item._id === id);
     const json = await makeRequest(
-      "http://localhost:3032/api/tasks/remove",
+      `${backendUrl}/api/tasks/remove`,
       "POST",
       item
     );
@@ -41,19 +41,13 @@ function App() {
   };
 
   const sendDataToServer = async (item) => {
-    const json = await makeRequest(
-      "http://localhost:3032/api/tasks",
-      "POST",
-      item
-    );
+    const json = await makeRequest(`${backendUrl}/api/tasks`, "POST", item);
     setItems([...items, json.data]);
   };
 
   useEffect(() => {
     const loadData = async () => {
-      const response = await (
-        await fetch("http://localhost:3032/api/tasks")
-      ).json();
+      const response = await (await fetch(`${backendUrl}/api/tasks`)).json();
       setItems(response.data);
     };
     loadData();
