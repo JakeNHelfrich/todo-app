@@ -13,9 +13,11 @@ const Item = (props) => {
       <input
         type="checkbox"
         className="item__check"
-        onClick={toggleComplete}
+        onClick={() => props.toggleComplete(props._id)}
       ></input>
-      <span className={done ? "item__task--complete" : "item__task"}>
+      <span
+        className={props.isCompleted ? "item__task--complete" : "item__task"}
+      >
         {props.name}
       </span>
       <span className="item__dlt" onClick={() => props.removeItem(props._id)}>

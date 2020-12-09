@@ -70,3 +70,9 @@
     color: green;
     text-decoration: line-through;
 }
+
+.login {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
